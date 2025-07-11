@@ -69,7 +69,7 @@ jobs:
           id: metadata
           uses: docker/metadata-action@v5
           with:
-            images: ${{ inputs.registry }}/${{ inputs.image_name }}
+            images: ${{ secrets.docker_username }}/${{ inputs.image_name }}
             tags: |
               type=raw,value=${{ inputs.image_tag }}
 
