@@ -17,10 +17,6 @@ on:
             type: string
             required: true
             description: Tag of the Docker image
-        ref:
-            type: string
-            required: true
-            description: Git reference (branch, tag, etc.) for the image
         dockerfile_path:
             type: string
             required: true
@@ -46,10 +42,18 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
+        - name: Get SHA
+          run: |
+            if [[ "${{ github.event_name }}" == 'pull_request' ]]; then
+              echo "SHA=${{ github.event.pull_request.head.sha }}" >> $GITHUB_ENV
+            else
+              echo "SHA=${{ github.sha }}" >> $GITHUB_ENV
+            fi
+
         - name: Checkout code
           uses: actions/checkout@v3
           with:
-            ref: ${{ inputs.ref }}
+            ref: ${{ env.SHA }}
         
         - name: Log in to Docker Hub
           uses: docker/login-action@v3
