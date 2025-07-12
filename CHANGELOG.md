@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.4](https://github.com/angelvargass/reusable-workflows/compare/v1.1.3...v1.1.4) (2025-07-12)
+
+
+### Bug Fixes
+
+* **actions:** add gh token ([#14](https://github.com/angelvargass/reusable-workflows/issues/14)) ([bf67a34](https://github.com/angelvargass/reusable-workflows/commit/bf67a349e796d1d5720d4894dcf5ee02760b86f0))
+
 ## [1.1.3](https://github.com/angelvargass/reusable-workflows/compare/v1.1.2...v1.1.3) (2025-07-12)
 
 
