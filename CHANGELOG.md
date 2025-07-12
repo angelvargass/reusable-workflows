@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.2](https://github.com/angelvargass/reusable-workflows/compare/v1.1.1...v1.1.2) (2025-07-12)
+
+
+### Bug Fixes
+
+* **actions:** Fix major release ([#10](https://github.com/angelvargass/reusable-workflows/issues/10)) ([307a167](https://github.com/angelvargass/reusable-workflows/commit/307a1672c303a23a8bf0b13338d84987eb9753c9))
+
 ## [1.1.1](https://github.com/angelvargass/reusable-workflows/compare/v1.1.0...v1.1.1) (2025-07-12)
 
 
