@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.3](https://github.com/angelvargass/reusable-workflows/compare/v1.1.2...v1.1.3) (2025-07-12)
+
+
+### Bug Fixes
+
+* **actions:** set gh-actions-bot as author ([#12](https://github.com/angelvargass/reusable-workflows/issues/12)) ([646c0ed](https://github.com/angelvargass/reusable-workflows/commit/646c0ed4d953322738c97b687e6412a63861fda3))
+
 ## [1.1.2](https://github.com/angelvargass/reusable-workflows/compare/v1.1.1...v1.1.2) (2025-07-12)
 
 
