@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.1.0](https://github.com/angelvargass/reusable-workflows/compare/v1.0.0...v1.1.0) (2025-07-12)
+
+
+### Features
+
+* **actions:** ability to reference workflows by major version only ([#7](https://github.com/angelvargass/reusable-workflows/issues/7)) ([dc358bc](https://github.com/angelvargass/reusable-workflows/commit/dc358bc80e537573710bd572a21dd55c4835726f))
+
+
+### Bug Fixes
+
+* bump actions/checkout from 3 to 4 in /.github/workflows ([#5](https://github.com/angelvargass/reusable-workflows/issues/5)) ([dffd467](https://github.com/angelvargass/reusable-workflows/commit/dffd467a32d4acb38c4794d93ec055e4d5f62a47))
+
 ## 1.0.0 (2025-07-11)
 
 
