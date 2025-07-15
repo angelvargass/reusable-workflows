@@ -81,7 +81,7 @@ jobs:
         - name: Build and export to Docker
           uses: docker/build-push-action@v6
           with:
-            platforms: linux/amd64,linux/arm64,linux/arm/v7
+            platforms: linux/amd64
             context: ${{ inputs.dockerfile_path }}
             tags: ${{ steps.metadata.outputs.tags }}
             labels: ${{ steps.metadata.outputs.labels }}
