@@ -94,6 +94,7 @@ jobs:
             severity: 'CRITICAL,HIGH,MEDIUM'
 
     push:
+      needs: build-scan
       if: ${{ inputs.push == 'true' }}
       name: push docker image
       runs-on: ubuntu-latest
