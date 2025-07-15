@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.1](https://github.com/angelvargass/reusable-workflows/compare/v1.2.0...v1.2.1) (2025-07-15)
+
+
+### Bug Fixes
+
+* fix multi arch build ([#19](https://github.com/angelvargass/reusable-workflows/issues/19)) ([b2f4e78](https://github.com/angelvargass/reusable-workflows/commit/b2f4e78b7a0cf11ed6a2e770baf60178a013b465))
+
 ## [1.2.0](https://github.com/angelvargass/reusable-workflows/compare/v1.1.4...v1.2.0) (2025-07-15)
 
 
