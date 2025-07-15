@@ -37,11 +37,66 @@ permissions:
   contents: read
 
 jobs:
-    build-scan-push:
-        name: Build, Scan, and Push Docker Image
+    build-scan:
+        name: build and scan docker image
         runs-on: ubuntu-latest
 
         steps:
+        - name: Get SHA
+          run: |
+            if [[ "${{ github.event_name }}" == 'pull_request' ]]; then
+              echo "SHA=${{ github.event.pull_request.head.sha }}" >> $GITHUB_ENV
+            else
+              echo "SHA=${{ github.sha }}" >> $GITHUB_ENV
+            fi
+
+        - name: Checkout code
+          uses: actions/checkout@v4
+          with:
+            ref: ${{ env.SHA }}
+        
+        - name: Log in to Docker Hub
+          uses: docker/login-action@v3
+          with:
+            registry: ${{ inputs.registry }}
+            username: ${{ secrets.docker_username }}
+            password: ${{ secrets.docker_password }}
+
+        - name: Set up Docker Buildx
+          uses: docker/setup-buildx-action@v3
+        
+        - name: Extract metadata (tags, labels) for Docker
+          id: metadata
+          uses: docker/metadata-action@v5
+          with:
+            images: ${{ secrets.docker_username }}/${{ inputs.image_name }}
+            tags: |
+              type=raw,value=${{ inputs.image_tag }}
+
+        - name: Build and export to Docker
+          uses: docker/build-push-action@v6
+          with:
+            load: true
+            context: ${{ inputs.dockerfile_path }}
+            tags: ${{ steps.metadata.outputs.tags }}
+            labels: ${{ steps.metadata.outputs.labels }}
+
+        - name: Run Trivy vulnerability scanner
+          if: ${{ inputs.scan == 'true' }}
+          uses: aquasecurity/trivy-action@0.32.0
+          with:
+            image-ref: ${{ steps.metadata.outputs.tags }}
+            format: 'table'
+            exit-code: '1'
+            ignore-unfixed: true
+            vuln-type: 'os,library'
+            severity: 'CRITICAL,HIGH,MEDIUM'
+
+    push:
+      if: ${{ inputs.push == 'true' }}
+      name: push docker image
+      runs-on: ubuntu-latest
+      steps:
         - name: Get SHA
           run: |
             if [[ "${{ github.event_name }}" == 'pull_request' ]]; then
@@ -67,8 +122,6 @@ jobs:
 
         - name: Set up Docker Buildx
           uses: docker/setup-buildx-action@v3
-          with:
-            platforms: linux/amd64,linux/arm64
         
         - name: Extract metadata (tags, labels) for Docker
           id: metadata
@@ -78,27 +131,7 @@ jobs:
             tags: |
               type=raw,value=${{ inputs.image_tag }}
 
-        - name: Build and export to Docker
-          uses: docker/build-push-action@v6
-          with:
-            platforms: linux/amd64
-            context: ${{ inputs.dockerfile_path }}
-            tags: ${{ steps.metadata.outputs.tags }}
-            labels: ${{ steps.metadata.outputs.labels }}
-
-        - name: Run Trivy vulnerability scanner
-          if: ${{ inputs.scan == 'true' }}
-          uses: aquasecurity/trivy-action@0.32.0
-          with:
-            image-ref: ${{ steps.metadata.outputs.tags }}
-            format: 'table'
-            exit-code: '1'
-            ignore-unfixed: true
-            vuln-type: 'os,library'
-            severity: 'CRITICAL,HIGH,MEDIUM'
-
-        - name: Build and push to Docker
-          if: ${{ inputs.push == 'true' }}
+        - name: build and push to docker registry
           uses: docker/build-push-action@v6
           with:
             push: true
