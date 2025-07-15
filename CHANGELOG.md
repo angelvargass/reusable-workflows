@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.2.0](https://github.com/angelvargass/reusable-workflows/compare/v1.1.4...v1.2.0) (2025-07-15)
+
+
+### Features
+
+* support multi-arch ([#17](https://github.com/angelvargass/reusable-workflows/issues/17)) ([e2e3fbf](https://github.com/angelvargass/reusable-workflows/commit/e2e3fbff7a579e2d6c5f00fd29bd11c0ce390fb0))
+
+
+### Bug Fixes
+
+* bump actions/checkout from 3 to 4 in /.github/workflows ([#16](https://github.com/angelvargass/reusable-workflows/issues/16)) ([62a7def](https://github.com/angelvargass/reusable-workflows/commit/62a7defe9843ce806946bd1fcd13dc5d2739f0dc))
+
 ## [1.1.4](https://github.com/angelvargass/reusable-workflows/compare/v1.1.3...v1.1.4) (2025-07-12)
 
 
